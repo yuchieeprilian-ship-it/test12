@@ -288,10 +288,12 @@ function ProfilePage({ onOpenGallery }) {
 const CONTACT = {
   cover:
   "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1600&h=900&q=80",
-  email: "hello@ariasolenne.studio",
-  phone: "+1 (206) 555-0148",
-  location: "Seattle, WA",
-  note: "For commissions, print inquiries, or exhibition collaborations — send a short note and I’ll reply within a few days."
+  email: "info@zifakaryautama.com",
+  phone: "0813-3337-0743",
+  phoneHref: "tel:+6281333370743",
+  location:
+  "Jl. Kiwi No.10, RT.13/RW.9, Klp. Dua Wetan, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13730",
+  note: "Untuk kerja sama, pertanyaan, atau kunjungan studio — kirim pesan singkat dan kami akan membalas secepatnya."
 };
 
 function ContactPage() {
@@ -311,12 +313,17 @@ function ContactPage() {
 
     React.createElement("div", { className: "contactInner" }, /*#__PURE__*/
     React.createElement("div", { className: "contactIntro" }, /*#__PURE__*/
-    React.createElement("p", { className: "contactKicker" }, "Get in touch"), /*#__PURE__*/
+    React.createElement("p", { className: "contactKicker" }, "Hubungi kami"), /*#__PURE__*/
     React.createElement("h1", { className: "contactTitle" }, "Contact"), /*#__PURE__*/
     React.createElement("p", { className: "contactNote" }, CONTACT.note)), /*#__PURE__*/
 
 
     React.createElement("ul", { className: "contactDetails" }, /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/
+    React.createElement("span", { className: "contactDetailLabel" }, "Alamat"), /*#__PURE__*/
+    React.createElement("span", { className: "contactDetailValue" }, CONTACT.location)), /*#__PURE__*/
+
+
     React.createElement("li", null, /*#__PURE__*/
     React.createElement("span", { className: "contactDetailLabel" }, "Email"), /*#__PURE__*/
     React.createElement("a", { className: "contactDetailValue", href: `mailto:${CONTACT.email}` },
@@ -324,22 +331,17 @@ function ContactPage() {
 
 
     React.createElement("li", null, /*#__PURE__*/
-    React.createElement("span", { className: "contactDetailLabel" }, "Phone"), /*#__PURE__*/
-    React.createElement("a", { className: "contactDetailValue", href: "tel:+12065550148" },
-    CONTACT.phone)), /*#__PURE__*/
-
-
-    React.createElement("li", null, /*#__PURE__*/
-    React.createElement("span", { className: "contactDetailLabel" }, "Studio"), /*#__PURE__*/
-    React.createElement("span", { className: "contactDetailValue" }, CONTACT.location))),
+    React.createElement("span", { className: "contactDetailLabel" }, "Telepon"), /*#__PURE__*/
+    React.createElement("a", { className: "contactDetailValue", href: CONTACT.phoneHref },
+    CONTACT.phone))),
 
 
     sent ? /*#__PURE__*/
-    React.createElement("p", { className: "contactThanks", role: "status" }, "Thanks — your message is ready. I’ll be in touch soon.") : /*#__PURE__*/
+    React.createElement("p", { className: "contactThanks", role: "status" }, "Terima kasih — pesan Anda sudah siap. Kami akan segera menghubungi Anda.") : /*#__PURE__*/
 
     React.createElement("form", { className: "contactForm", onSubmit: handleSubmit }, /*#__PURE__*/
     React.createElement("label", { className: "contactField" }, /*#__PURE__*/
-    React.createElement("span", null, "Name"), /*#__PURE__*/
+    React.createElement("span", null, "Nama"), /*#__PURE__*/
     React.createElement("input", { type: "text", name: "name", required: true, autoComplete: "name" })), /*#__PURE__*/
 
 
@@ -349,11 +351,11 @@ function ContactPage() {
 
 
     React.createElement("label", { className: "contactField" }, /*#__PURE__*/
-    React.createElement("span", null, "Message"), /*#__PURE__*/
+    React.createElement("span", null, "Pesan"), /*#__PURE__*/
     React.createElement("textarea", { name: "message", rows: "4", required: true })), /*#__PURE__*/
 
 
-    React.createElement("button", { type: "submit", className: "contactSubmit" }, "Send message")))));
+    React.createElement("button", { type: "submit", className: "contactSubmit" }, "Kirim pesan")))));
 
 
 

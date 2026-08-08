@@ -292,10 +292,12 @@ function ProfilePage({ onOpenGallery }) {
 const CONTACT = {
   cover:
     "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1600&h=900&q=80",
-  email: "hello@ariasolenne.studio",
-  phone: "+1 (206) 555-0148",
-  location: "Seattle, WA",
-  note: "For commissions, print inquiries, or exhibition collaborations — send a short note and I’ll reply within a few days.",
+  email: "info@zifakaryautama.com",
+  phone: "0813-3337-0743",
+  phoneHref: "tel:+6281333370743",
+  location:
+    "Jl. Kiwi No.10, RT.13/RW.9, Klp. Dua Wetan, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13730",
+  note: "Untuk kerja sama, pertanyaan, atau kunjungan studio — kirim pesan singkat dan kami akan membalas secepatnya.",
 }
 
 function ContactPage() {
@@ -315,12 +317,16 @@ function ContactPage() {
 
       <div className="contactInner">
         <div className="contactIntro">
-          <p className="contactKicker">Get in touch</p>
+          <p className="contactKicker">Hubungi kami</p>
           <h1 className="contactTitle">Contact</h1>
           <p className="contactNote">{CONTACT.note}</p>
         </div>
 
         <ul className="contactDetails">
+          <li>
+            <span className="contactDetailLabel">Alamat</span>
+            <span className="contactDetailValue">{CONTACT.location}</span>
+          </li>
           <li>
             <span className="contactDetailLabel">Email</span>
             <a className="contactDetailValue" href={`mailto:${CONTACT.email}`}>
@@ -328,25 +334,21 @@ function ContactPage() {
             </a>
           </li>
           <li>
-            <span className="contactDetailLabel">Phone</span>
-            <a className="contactDetailValue" href="tel:+12065550148">
+            <span className="contactDetailLabel">Telepon</span>
+            <a className="contactDetailValue" href={CONTACT.phoneHref}>
               {CONTACT.phone}
             </a>
-          </li>
-          <li>
-            <span className="contactDetailLabel">Studio</span>
-            <span className="contactDetailValue">{CONTACT.location}</span>
           </li>
         </ul>
 
         {sent ? (
           <p className="contactThanks" role="status">
-            Thanks — your message is ready. I’ll be in touch soon.
+            Terima kasih — pesan Anda sudah siap. Kami akan segera menghubungi Anda.
           </p>
         ) : (
           <form className="contactForm" onSubmit={handleSubmit}>
             <label className="contactField">
-              <span>Name</span>
+              <span>Nama</span>
               <input type="text" name="name" required autoComplete="name" />
             </label>
             <label className="contactField">
@@ -354,11 +356,11 @@ function ContactPage() {
               <input type="email" name="email" required autoComplete="email" />
             </label>
             <label className="contactField">
-              <span>Message</span>
+              <span>Pesan</span>
               <textarea name="message" rows="4" required />
             </label>
             <button type="submit" className="contactSubmit">
-              Send message
+              Kirim pesan
             </button>
           </form>
         )}
