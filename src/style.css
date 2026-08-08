@@ -193,12 +193,198 @@
   width: 1px;
 }
 
+.siteNav {
+  display: flex;
+  gap: 0.5rem;
+  position: fixed;
+  right: 1.5rem;
+  top: 1.5rem;
+  z-index: 40;
+}
+
+.siteNavLink {
+  appearance: none;
+  backdrop-filter: blur(10px);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  color: rgb(255 255 255 / 75%);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1rem;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.siteNavLink:hover {
+  background: rgb(255 255 255 / 16%);
+  color: #fff;
+}
+
+.siteNavLink[data-active="true"] {
+  background: rgb(255 255 255 / 20%);
+  border-color: rgb(255 255 255 / 40%);
+  color: #fff;
+}
+
+.profile {
+  background: #0b0b0f;
+  color: #fff;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+.profileBackdrop {
+  inset: 0;
+  position: absolute;
+}
+
+.profileCover {
+  display: block;
+  filter: saturate(0.85);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.profileScrim {
+  background:
+    linear-gradient(90deg, rgb(11 11 15 / 92%) 0%, rgb(11 11 15 / 72%) 48%, rgb(11 11 15 / 45%) 100%),
+    linear-gradient(180deg, rgb(11 11 15 / 35%) 0%, rgb(11 11 15 / 88%) 100%);
+  inset: 0;
+  position: absolute;
+}
+
+.profileInner {
+  animation: content-in 0.7s var(--zoom-ease, cubic-bezier(0.22, 1, 0.36, 1)) both;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  justify-content: center;
+  max-width: min(560px, 92vw);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 5.5rem 1.5rem 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+@media (width >= 768px) {
+  .profileInner {
+    padding-left: 3.5rem;
+  }
+}
+
+.profileHero {
+  align-items: center;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.profileAvatar {
+  border: 2px solid rgb(255 255 255 / 35%);
+  border-radius: 50%;
+  height: 88px;
+  object-fit: cover;
+  width: 88px;
+}
+
+.profileIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.profileKicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin: 0;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.profileName {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.profileLocation {
+  color: rgb(255 255 255 / 75%);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.profileBio {
+  color: rgb(255 255 255 / 85%);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 42ch;
+}
+
+.profileStats {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profileStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.profileStatValue {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.profileStatLabel {
+  color: rgb(255 255 255 / 65%);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profileCta {
+  appearance: none;
+  align-self: flex-start;
+  background: rgb(255 255 255 / 92%);
+  border: 0;
+  border-radius: 999px;
+  color: #0b0b0f;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.4rem;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.profileCta:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .slide {
     transition: none;
   }
 
-  .content {
+  .content,
+  .profileInner {
     animation: none;
   }
 }

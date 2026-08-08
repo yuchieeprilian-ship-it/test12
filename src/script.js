@@ -171,6 +171,29 @@ function ActiveContent({ thumbOrder }) {
   )
 }
 
+function SiteNav({ page, onNavigate }) {
+  return (
+    <nav className="siteNav" aria-label="Main">
+      <button
+        type="button"
+        className="siteNavLink"
+        data-active={String(page === "gallery")}
+        onClick={() => onNavigate("gallery")}
+      >
+        Gallery
+      </button>
+      <button
+        type="button"
+        className="siteNavLink"
+        data-active={String(page === "profile")}
+        onClick={() => onNavigate("profile")}
+      >
+        Profile
+      </button>
+    </nav>
+  )
+}
+
 function EnlargeGallery() {
   // The thumbnail strip as a queue of item ids, left to right; the active
   // item is excluded. Every change removes the incoming item from the queue
@@ -201,9 +224,91 @@ function EnlargeGallery() {
   )
 }
 
+const PROFILE = {
+  name: "Aria Solenne",
+  role: "Landscape Photographer",
+  location: "Pacific Northwest",
+  avatar:
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+  cover:
+    "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&h=900&q=80",
+  bio: "Capturing quiet light between forests, coastlines, and high country. This gallery collects frames from recent travels — each one meant to be seen large, then tucked back into the strip.",
+  stats: [
+    { label: "Works", value: String(TOTAL) },
+    { label: "Exhibits", value: "12" },
+    { label: "Years", value: "8" },
+  ],
+}
+
+function ProfilePage({ onOpenGallery }) {
+  return (
+    <div className="profile">
+      <div className="profileBackdrop" aria-hidden="true">
+        <img src={PROFILE.cover} alt="" className="profileCover" />
+        <div className="profileScrim" />
+      </div>
+
+      <div className="profileInner">
+        <div className="profileHero">
+          <img
+            src={PROFILE.avatar}
+            alt={PROFILE.name}
+            className="profileAvatar"
+          />
+          <div className="profileIntro">
+            <p className="profileKicker">{PROFILE.role}</p>
+            <h1 className="profileName">{PROFILE.name}</h1>
+            <p className="profileLocation">{PROFILE.location}</p>
+          </div>
+        </div>
+
+        <p className="profileBio">{PROFILE.bio}</p>
+
+        <ul className="profileStats">
+          {PROFILE.stats.map((stat) => (
+            <li key={stat.label} className="profileStat">
+              <span className="profileStatValue">{stat.value}</span>
+              <span className="profileStatLabel">{stat.label}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button type="button" className="profileCta" onClick={onOpenGallery}>
+          View gallery
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function getPageFromHash() {
+  return window.location.hash === "#/profile" ? "profile" : "gallery"
+}
 
 const App = () => {
-  return <EnlargeGallery />;
+  const [page, setPage] = useState(getPageFromHash)
+
+  useEffect(() => {
+    const onHashChange = () => setPage(getPageFromHash())
+    window.addEventListener("hashchange", onHashChange)
+    return () => window.removeEventListener("hashchange", onHashChange)
+  }, [])
+
+  const navigate = useCallback((next) => {
+    window.location.hash = next === "profile" ? "#/profile" : "#/"
+    setPage(next)
+  }, [])
+
+  return (
+    <>
+      <SiteNav page={page} onNavigate={navigate} />
+      {page === "profile" ? (
+        <ProfilePage onOpenGallery={() => navigate("gallery")} />
+      ) : (
+        <EnlargeGallery />
+      )}
+    </>
+  )
 };
 
 const container = document.getElementById("root");

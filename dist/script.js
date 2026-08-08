@@ -171,6 +171,26 @@ function ActiveContent({ thumbOrder }) {
 
 }
 
+function SiteNav({ page, onNavigate }) {
+  return /*#__PURE__*/(
+    React.createElement("nav", { className: "siteNav", "aria-label": "Main" }, /*#__PURE__*/
+    React.createElement("button", {
+      type: "button",
+      className: "siteNavLink",
+      "data-active": String(page === "gallery"),
+      onClick: () => onNavigate("gallery") }, "Gallery"), /*#__PURE__*/
+
+
+    React.createElement("button", {
+      type: "button",
+      className: "siteNavLink",
+      "data-active": String(page === "profile"),
+      onClick: () => onNavigate("profile") }, "Profile")));
+
+
+
+}
+
 function EnlargeGallery() {
   // The thumbnail strip as a queue of item ids, left to right; the active
   // item is excluded. Every change removes the incoming item from the queue
@@ -201,9 +221,90 @@ function EnlargeGallery() {
 
 }
 
+const PROFILE = {
+  name: "Aria Solenne",
+  role: "Landscape Photographer",
+  location: "Pacific Northwest",
+  avatar:
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+  cover:
+  "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&h=900&q=80",
+  bio: "Capturing quiet light between forests, coastlines, and high country. This gallery collects frames from recent travels — each one meant to be seen large, then tucked back into the strip.",
+  stats: [
+  { label: "Works", value: String(TOTAL) },
+  { label: "Exhibits", value: "12" },
+  { label: "Years", value: "8" }]
+
+};
+
+function ProfilePage({ onOpenGallery }) {
+  return /*#__PURE__*/(
+    React.createElement("div", { className: "profile" }, /*#__PURE__*/
+    React.createElement("div", { className: "profileBackdrop", "aria-hidden": "true" }, /*#__PURE__*/
+    React.createElement("img", { src: PROFILE.cover, alt: "", className: "profileCover" }), /*#__PURE__*/
+    React.createElement("div", { className: "profileScrim" })), /*#__PURE__*/
+
+
+    React.createElement("div", { className: "profileInner" }, /*#__PURE__*/
+    React.createElement("div", { className: "profileHero" }, /*#__PURE__*/
+    React.createElement("img", {
+      src: PROFILE.avatar,
+      alt: PROFILE.name,
+      className: "profileAvatar" }), /*#__PURE__*/
+
+
+    React.createElement("div", { className: "profileIntro" }, /*#__PURE__*/
+    React.createElement("p", { className: "profileKicker" }, PROFILE.role), /*#__PURE__*/
+    React.createElement("h1", { className: "profileName" }, PROFILE.name), /*#__PURE__*/
+    React.createElement("p", { className: "profileLocation" }, PROFILE.location))), /*#__PURE__*/
+
+
+
+    React.createElement("p", { className: "profileBio" }, PROFILE.bio), /*#__PURE__*/
+
+    React.createElement("ul", { className: "profileStats" },
+    PROFILE.stats.map(stat => /*#__PURE__*/
+    React.createElement("li", { key: stat.label, className: "profileStat" }, /*#__PURE__*/
+    React.createElement("span", { className: "profileStatValue" }, stat.value), /*#__PURE__*/
+    React.createElement("span", { className: "profileStatLabel" }, stat.label)))), /*#__PURE__*/
+
+
+
+
+    React.createElement("button", { type: "button", className: "profileCta", onClick: onOpenGallery }, "View gallery"))));
+
+
+
+
+}
+
+function getPageFromHash() {
+  return window.location.hash === "#/profile" ? "profile" : "gallery";
+}
 
 const App = () => {
-  return /*#__PURE__*/React.createElement(EnlargeGallery, null);
+  const [page, setPage] = useState(getPageFromHash);
+
+  useEffect(() => {
+    const onHashChange = () => setPage(getPageFromHash());
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const navigate = useCallback(next => {
+    window.location.hash = next === "profile" ? "#/profile" : "#/";
+    setPage(next);
+  }, []);
+
+  return /*#__PURE__*/(
+    React.createElement(React.Fragment, null, /*#__PURE__*/
+    React.createElement(SiteNav, { page: page, onNavigate: navigate }),
+    page === "profile" ? /*#__PURE__*/
+    React.createElement(ProfilePage, { onOpenGallery: () => navigate("gallery") }) : /*#__PURE__*/
+
+    React.createElement(EnlargeGallery, null)));
+
+
 };
 
 const container = document.getElementById("root");
