@@ -190,6 +190,14 @@ function SiteNav({ page, onNavigate }) {
       >
         Profile
       </button>
+      <button
+        type="button"
+        className="siteNavLink"
+        data-active={String(page === "contact")}
+        onClick={() => onNavigate("contact")}
+      >
+        Contact
+      </button>
     </nav>
   )
 }
@@ -281,8 +289,95 @@ function ProfilePage({ onOpenGallery }) {
   )
 }
 
+const CONTACT = {
+  cover:
+    "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1600&h=900&q=80",
+  email: "hello@ariasolenne.studio",
+  phone: "+1 (206) 555-0148",
+  location: "Seattle, WA",
+  note: "For commissions, print inquiries, or exhibition collaborations — send a short note and I’ll reply within a few days.",
+}
+
+function ContactPage() {
+  const [sent, setSent] = useState(false)
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    setSent(true)
+  }
+
+  return (
+    <div className="contact">
+      <div className="contactBackdrop" aria-hidden="true">
+        <img src={CONTACT.cover} alt="" className="contactCover" />
+        <div className="contactScrim" />
+      </div>
+
+      <div className="contactInner">
+        <div className="contactIntro">
+          <p className="contactKicker">Get in touch</p>
+          <h1 className="contactTitle">Contact</h1>
+          <p className="contactNote">{CONTACT.note}</p>
+        </div>
+
+        <ul className="contactDetails">
+          <li>
+            <span className="contactDetailLabel">Email</span>
+            <a className="contactDetailValue" href={`mailto:${CONTACT.email}`}>
+              {CONTACT.email}
+            </a>
+          </li>
+          <li>
+            <span className="contactDetailLabel">Phone</span>
+            <a className="contactDetailValue" href="tel:+12065550148">
+              {CONTACT.phone}
+            </a>
+          </li>
+          <li>
+            <span className="contactDetailLabel">Studio</span>
+            <span className="contactDetailValue">{CONTACT.location}</span>
+          </li>
+        </ul>
+
+        {sent ? (
+          <p className="contactThanks" role="status">
+            Thanks — your message is ready. I’ll be in touch soon.
+          </p>
+        ) : (
+          <form className="contactForm" onSubmit={handleSubmit}>
+            <label className="contactField">
+              <span>Name</span>
+              <input type="text" name="name" required autoComplete="name" />
+            </label>
+            <label className="contactField">
+              <span>Email</span>
+              <input type="email" name="email" required autoComplete="email" />
+            </label>
+            <label className="contactField">
+              <span>Message</span>
+              <textarea name="message" rows="4" required />
+            </label>
+            <button type="submit" className="contactSubmit">
+              Send message
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function getPageFromHash() {
-  return window.location.hash === "#/profile" ? "profile" : "gallery"
+  const hash = window.location.hash
+  if (hash === "#/profile") return "profile"
+  if (hash === "#/contact") return "contact"
+  return "gallery"
+}
+
+const HASH_BY_PAGE = {
+  gallery: "#/",
+  profile: "#/profile",
+  contact: "#/contact",
 }
 
 const App = () => {
@@ -295,7 +390,7 @@ const App = () => {
   }, [])
 
   const navigate = useCallback((next) => {
-    window.location.hash = next === "profile" ? "#/profile" : "#/"
+    window.location.hash = HASH_BY_PAGE[next] || "#/"
     setPage(next)
   }, [])
 
@@ -304,6 +399,8 @@ const App = () => {
       <SiteNav page={page} onNavigate={navigate} />
       {page === "profile" ? (
         <ProfilePage onOpenGallery={() => navigate("gallery")} />
+      ) : page === "contact" ? (
+        <ContactPage />
       ) : (
         <EnlargeGallery />
       )}

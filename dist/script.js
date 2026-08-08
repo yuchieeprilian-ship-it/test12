@@ -185,7 +185,14 @@ function SiteNav({ page, onNavigate }) {
       type: "button",
       className: "siteNavLink",
       "data-active": String(page === "profile"),
-      onClick: () => onNavigate("profile") }, "Profile")));
+      onClick: () => onNavigate("profile") }, "Profile"), /*#__PURE__*/
+
+
+    React.createElement("button", {
+      type: "button",
+      className: "siteNavLink",
+      "data-active": String(page === "contact"),
+      onClick: () => onNavigate("contact") }, "Contact")));
 
 
 
@@ -278,9 +285,93 @@ function ProfilePage({ onOpenGallery }) {
 
 }
 
-function getPageFromHash() {
-  return window.location.hash === "#/profile" ? "profile" : "gallery";
+const CONTACT = {
+  cover:
+  "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1600&h=900&q=80",
+  email: "hello@ariasolenne.studio",
+  phone: "+1 (206) 555-0148",
+  location: "Seattle, WA",
+  note: "For commissions, print inquiries, or exhibition collaborations — send a short note and I’ll reply within a few days."
+};
+
+function ContactPage() {
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setSent(true);
+  };
+
+  return /*#__PURE__*/(
+    React.createElement("div", { className: "contact" }, /*#__PURE__*/
+    React.createElement("div", { className: "contactBackdrop", "aria-hidden": "true" }, /*#__PURE__*/
+    React.createElement("img", { src: CONTACT.cover, alt: "", className: "contactCover" }), /*#__PURE__*/
+    React.createElement("div", { className: "contactScrim" })), /*#__PURE__*/
+
+
+    React.createElement("div", { className: "contactInner" }, /*#__PURE__*/
+    React.createElement("div", { className: "contactIntro" }, /*#__PURE__*/
+    React.createElement("p", { className: "contactKicker" }, "Get in touch"), /*#__PURE__*/
+    React.createElement("h1", { className: "contactTitle" }, "Contact"), /*#__PURE__*/
+    React.createElement("p", { className: "contactNote" }, CONTACT.note)), /*#__PURE__*/
+
+
+    React.createElement("ul", { className: "contactDetails" }, /*#__PURE__*/
+    React.createElement("li", null, /*#__PURE__*/
+    React.createElement("span", { className: "contactDetailLabel" }, "Email"), /*#__PURE__*/
+    React.createElement("a", { className: "contactDetailValue", href: `mailto:${CONTACT.email}` },
+    CONTACT.email)), /*#__PURE__*/
+
+
+    React.createElement("li", null, /*#__PURE__*/
+    React.createElement("span", { className: "contactDetailLabel" }, "Phone"), /*#__PURE__*/
+    React.createElement("a", { className: "contactDetailValue", href: "tel:+12065550148" },
+    CONTACT.phone)), /*#__PURE__*/
+
+
+    React.createElement("li", null, /*#__PURE__*/
+    React.createElement("span", { className: "contactDetailLabel" }, "Studio"), /*#__PURE__*/
+    React.createElement("span", { className: "contactDetailValue" }, CONTACT.location))),
+
+
+    sent ? /*#__PURE__*/
+    React.createElement("p", { className: "contactThanks", role: "status" }, "Thanks — your message is ready. I’ll be in touch soon.") : /*#__PURE__*/
+
+    React.createElement("form", { className: "contactForm", onSubmit: handleSubmit }, /*#__PURE__*/
+    React.createElement("label", { className: "contactField" }, /*#__PURE__*/
+    React.createElement("span", null, "Name"), /*#__PURE__*/
+    React.createElement("input", { type: "text", name: "name", required: true, autoComplete: "name" })), /*#__PURE__*/
+
+
+    React.createElement("label", { className: "contactField" }, /*#__PURE__*/
+    React.createElement("span", null, "Email"), /*#__PURE__*/
+    React.createElement("input", { type: "email", name: "email", required: true, autoComplete: "email" })), /*#__PURE__*/
+
+
+    React.createElement("label", { className: "contactField" }, /*#__PURE__*/
+    React.createElement("span", null, "Message"), /*#__PURE__*/
+    React.createElement("textarea", { name: "message", rows: "4", required: true })), /*#__PURE__*/
+
+
+    React.createElement("button", { type: "submit", className: "contactSubmit" }, "Send message")))));
+
+
+
+
 }
+
+function getPageFromHash() {
+  const hash = window.location.hash;
+  if (hash === "#/profile") return "profile";
+  if (hash === "#/contact") return "contact";
+  return "gallery";
+}
+
+const HASH_BY_PAGE = {
+  gallery: "#/",
+  profile: "#/profile",
+  contact: "#/contact"
+};
 
 const App = () => {
   const [page, setPage] = useState(getPageFromHash);
@@ -292,7 +383,7 @@ const App = () => {
   }, []);
 
   const navigate = useCallback(next => {
-    window.location.hash = next === "profile" ? "#/profile" : "#/";
+    window.location.hash = HASH_BY_PAGE[next] || "#/";
     setPage(next);
   }, []);
 
@@ -300,7 +391,9 @@ const App = () => {
     React.createElement(React.Fragment, null, /*#__PURE__*/
     React.createElement(SiteNav, { page: page, onNavigate: navigate }),
     page === "profile" ? /*#__PURE__*/
-    React.createElement(ProfilePage, { onOpenGallery: () => navigate("gallery") }) : /*#__PURE__*/
+    React.createElement(ProfilePage, { onOpenGallery: () => navigate("gallery") }) :
+    page === "contact" ? /*#__PURE__*/
+    React.createElement(ContactPage, null) : /*#__PURE__*/
 
     React.createElement(EnlargeGallery, null)));
 
