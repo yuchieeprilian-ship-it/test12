@@ -222,7 +222,7 @@ function EnlargeGallery() {
 }
 
 const PROFILE = {
-  name: "Aria Solenne",
+  name: "Yusiee",
   role: "Landscape Photographer",
   location: "Pacific Northwest",
   avatar:
