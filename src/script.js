@@ -83,7 +83,7 @@ const ITEMS = [
     title: "Alarm Suhu Ruangan",
     description:
       "Instalasi alarm suhu ruangan untuk server room agar suhu kritis dapat terdeteksi dan ditindaklanjuti segera.",
-    objectPosition: "50% 0%",
+    objectPosition: "50% 10%",
   },
   {
     id: 9,
