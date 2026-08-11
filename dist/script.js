@@ -73,7 +73,8 @@ const ITEMS = [
   alt: "Teknisi membersihkan komponen internal amplifier",
   title: "Perbaikan Paging System",
   description:
-  "Pembersihan dan perbaikan internal amplifier/paging agar sistem pengeras suara tetap berfungsi optimal." },
+  "Pembersihan dan perbaikan internal amplifier/paging agar sistem pengeras suara tetap berfungsi optimal.",
+  objectPosition: "50% 55%" },
 
 {
   id: 8,
