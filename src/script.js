@@ -74,7 +74,7 @@ const ITEMS = [
     title: "Perbaikan Paging System",
     description:
       "Pembersihan dan perbaikan internal amplifier/paging agar sistem pengeras suara tetap berfungsi optimal.",
-    objectPosition: "50% 55%",
+    objectPosition: "50% 65%",
   },
   {
     id: 8,
