@@ -82,7 +82,8 @@ const ITEMS = [
   alt: "Instalasi alarm suhu ruangan di dekat pintu server room",
   title: "Alarm Suhu Ruangan",
   description:
-  "Instalasi alarm suhu ruangan untuk server room agar suhu kritis dapat terdeteksi dan ditindaklanjuti segera." },
+  "Instalasi alarm suhu ruangan untuk server room agar suhu kritis dapat terdeteksi dan ditindaklanjuti segera.",
+  objectPosition: "50% 0%" },
 
 {
   id: 9,
@@ -120,7 +121,7 @@ function Slides({ thumbOrder }) {
             "data-active": String(active) }, /*#__PURE__*/
 
           React.createElement("div", { className: "slide", style: { "--offset": offset } }, /*#__PURE__*/
-          React.createElement("img", { src: item.src, alt: item.alt, className: "image" }),
+          React.createElement("img", { src: item.src, alt: item.alt, className: "image", style: item.objectPosition ? { objectPosition: item.objectPosition } : undefined }),
           !active && /*#__PURE__*/
           React.createElement("button", {
             type: "button",
