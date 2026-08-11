@@ -265,7 +265,7 @@ function EnlargeGallery() {
 }
 
 const PROFILE = {
-  name: "Zifa Karya Utama",
+  name: "PT. Zifa Karya Utama",
   role: "Electrical & Facility Services",
   location: "Jakarta Timur",
   avatar: "./images/01-preventif-maintenance-1.png",
