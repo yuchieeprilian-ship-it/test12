@@ -14,58 +14,84 @@ console.clear();
 const ITEMS = [
 {
   id: 1,
-  src: "./images/preventif-maintenance-panel.png",
-  alt: "Teknisi melakukan preventive maintenance pada panel listrik",
+  category: "Preventif Maintenance Panel",
+  src: "./images/01-preventif-maintenance-1.png",
+  alt: "Tim teknisi melakukan preventive maintenance pada panel listrik",
   title: "Preventif Maintenance Panel",
   description:
-  "Pemeriksaan dan perawatan berkala panel listrik untuk menjaga keandalan sistem, keamanan operasional, dan mencegah gangguan sebelum terjadi." },
+  "Perawatan berkala panel listrik oleh tim teknisi untuk menjaga keandalan sistem dan mencegah gangguan operasional." },
 
 {
   id: 2,
-  src: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&h=900&q=80",
-  alt: "Forest path with light filtering through trees",
-  title: "Into the Pines",
+  category: "Preventif Maintenance Panel",
+  src: "./images/02-preventif-maintenance-2.png",
+  alt: "Teknisi memeriksa komponen dalam panel listrik",
+  title: "Inspeksi Komponen Panel",
   description:
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at posuere magna. Nam eros purus, congue pulvinar turpis pretium, vulputate interdum turpis. Vivamus non arcu." },
+  "Pemeriksaan detail di dalam panel untuk memastikan kondisi mekanik dan elektrik tetap aman serta siap operasi." },
 
 {
   id: 3,
-  src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&h=900&q=80",
-  alt: "Rocky mountain peak against blue sky",
-  title: "The High Country",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " },
+  category: "Preventif Maintenance Panel",
+  src: "./images/03-preventif-maintenance-3.png",
+  alt: "Teknisi mengatur komponen di dalam panel kontrol",
+  title: "Perawatan Panel Kontrol",
+  description:
+  "Penyesuaian dan perawatan komponen panel kontrol agar performa sistem distribusi listrik tetap optimal." },
 
 {
   id: 4,
-  src: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1600&h=900&q=80",
-  alt: "Ocean waves at sunset",
-  title: "Last Light Offshore",
+  category: "Thermograph Panel",
+  src: "./images/04-thermograph-panel.png",
+  alt: "Pemeriksaan suhu panel listrik menggunakan kamera thermal",
+  title: "Thermograph Panel",
   description:
-  "Praesent vel orci orci. Nam sed eleifend felis. Duis eget risus vel nisl feugiat semper eu ut ligula. Morbi eget lorem porttitor, gravida diam lobortis." },
+  "Pemindaian suhu panel dengan kamera thermal untuk mendeteksi titik panas, beban berlebih, dan potensi kerusakan dini." },
 
 {
   id: 5,
-  src: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1600&h=900&q=80",
-  alt: "City skyline at night",
-  title: "After Hours",
+  category: "Terminasi dan Tightening",
+  src: "./images/05-terminasi-tightening.png",
+  alt: "Teknisi melakukan terminasi dan pengencangan koneksi panel",
+  title: "Terminasi dan Tightening",
   description:
-  "Ut pretium nibh vitae velit laoreet eleifend. Cras consectetur nisl elit, eu scelerisque ante placerat." },
+  "Pemeriksaan terminasi serta pengencangan koneksi kabel dan busbar agar kontak listrik tetap aman dan stabil." },
 
 {
   id: 6,
-  src: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1600&h=900&q=80",
-  alt: "Desert sand dunes",
-  title: "Sea of Sand",
+  category: "Sound System & Paging",
+  src: "./images/06-sound-paging-1.png",
+  alt: "Perbaikan unit amplifier sound system di workshop",
+  title: "Perawatan Sound System",
   description:
-  "Maecenas enim ex, pharetra ut efficitur accumsan, blandit in elit. Donec commodo sapien malesuada condimentum feugiat. Class aptent taciti sociosqu ad litora torquent per conubia." },
+  "Perawatan dan perbaikan perangkat sound system serta paging untuk menjaga kualitas audio dan keandalan perangkat." },
 
 {
   id: 7,
-  src: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1600&h=900&q=80",
-  alt: "Northern lights over snowy landscape",
-  title: "Solar Winds",
+  category: "Sound System & Paging",
+  src: "./images/07-sound-paging-2.png",
+  alt: "Teknisi membersihkan komponen internal amplifier",
+  title: "Perbaikan Paging System",
   description:
-  "Ut scelerisque non nulla ac scelerisque. Nulla sollicitudin suscipit dolor vitae lacinia. Quisque id dapibus est. Aenean eget magna id urna cursus congue." }];
+  "Pembersihan dan perbaikan internal amplifier/paging agar sistem pengeras suara tetap berfungsi optimal." },
+
+{
+  id: 8,
+  category: "Alarm Suhu Server Room",
+  src: "./images/08-alarm-suhu-1.png",
+  alt: "Instalasi alarm suhu ruangan di dekat pintu server room",
+  title: "Alarm Suhu Ruangan",
+  description:
+  "Instalasi alarm suhu ruangan untuk server room agar suhu kritis dapat terdeteksi dan ditindaklanjuti segera." },
+
+{
+  id: 9,
+  category: "Alarm Suhu Server Room",
+  src: "./images/09-alarm-suhu-2.png",
+  alt: "Panel alarm suhu Durabox dengan sirine dan lampu strobo",
+  title: "Monitoring Suhu Server Room",
+  description:
+  "Sistem monitoring suhu dengan indikator digital, sirine, dan strobo untuk proteksi lingkungan server room." }];
 
 
 
@@ -121,7 +147,7 @@ function ActiveContent({ thumbOrder }) {
     React.createElement("div", { className: "rail" }, /*#__PURE__*/
     React.createElement("div", { className: "content", key: item.id }, /*#__PURE__*/
     React.createElement("p", { className: "kicker" },
-    String(activeIndex + 1).padStart(2, "0"), " / ", String(TOTAL).padStart(2, "0")), /*#__PURE__*/
+    item.category, " · ", String(activeIndex + 1).padStart(2, "0"), " / ", String(TOTAL).padStart(2, "0")), /*#__PURE__*/
 
     React.createElement("h2", { className: "title" }, item.title), /*#__PURE__*/
     React.createElement("p", { className: "description" }, item.description)), /*#__PURE__*/
@@ -237,18 +263,16 @@ function EnlargeGallery() {
 }
 
 const PROFILE = {
-  name: "Yusiee",
-  role: "Landscape Photographer",
-  location: "Pacific Northwest",
-  avatar:
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
-  cover:
-  "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&h=900&q=80",
-  bio: "Capturing quiet light between forests, coastlines, and high country. This gallery collects frames from recent travels — each one meant to be seen large, then tucked back into the strip.",
+  name: "Zifa Karya Utama",
+  role: "Electrical & Facility Services",
+  location: "Jakarta Timur",
+  avatar: "./images/01-preventif-maintenance-1.png",
+  cover: "./images/02-preventif-maintenance-2.png",
+  bio: "Melayani preventive maintenance panel, thermograph, terminasi, perawatan sound/paging system, serta alarm suhu server room untuk menjaga keandalan fasilitas Anda.",
   stats: [
-  { label: "Works", value: String(TOTAL) },
-  { label: "Exhibits", value: "12" },
-  { label: "Years", value: "8" }]
+  { label: "Layanan", value: "5" },
+  { label: "Dokumentasi", value: String(TOTAL) },
+  { label: "Area", value: "JKT" }]
 
 };
 
@@ -294,8 +318,7 @@ function ProfilePage({ onOpenGallery }) {
 }
 
 const CONTACT = {
-  cover:
-  "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1600&h=900&q=80",
+  cover: "./images/04-thermograph-panel.png",
   email: "Admin@zifakaryautama.com",
   phone: "0813-3337-0743",
   phoneHref: "tel:+6281333370743",
